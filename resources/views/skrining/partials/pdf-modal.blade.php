@@ -66,19 +66,7 @@
 @endpush
 
 @php
-    $pdfUrl = route('skrining.pdf', [
-        'id_evaluasi' => $hasil_ai['id_evaluasi'],
-        'waktu' => $hasil_ai['waktu'],
-        'kategori' => $hasil_ai['kategori'],
-        'skor_risiko' => $hasil_ai['skor_risiko'],
-        'usia' => $hasil_ai['usia'],
-        'bmi' => $hasil_ai['bmi'],
-        'tekanan_darah' => $hasil_ai['tekanan_darah'],
-        'riwayat_diabetes' => $hasil_ai['riwayat_diabetes'],
-        'confidence' => $hasil_ai['confidence'],
-        'aktivitas' => $hasil_ai['aktivitas'],
-        'konsumsi' => $hasil_ai['konsumsi'],
-    ]);
+    $pdfUrl = route('skrining.pdf', ['id_evaluasi' => $hasil_ai['id_evaluasi']]);
 @endphp
 
 @push('scripts')

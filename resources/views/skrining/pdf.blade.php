@@ -50,6 +50,13 @@
             <td width="50%"><span class="label">Indeks Massa Tubuh (BMI)</span><span class="value">{{ $hasil_ai['bmi'] }} kg/m²</span></td>
         </tr>
         <tr>
+            <td><span class="label">Tinggi Badan</span><span class="value">{{ $hasil_ai['tinggi'] }} cm</span></td>
+            <td><span class="label">Berat Badan</span><span class="value">{{ $hasil_ai['berat'] }} kg</span></td>
+        </tr>
+        <tr>
+            <td colspan="2"><span class="label">Kategori BMI</span><span class="value">{{ $hasil_ai['kategori_bmi'] }}</span></td>
+        </tr>
+        <tr>
             <td><span class="label">Tekanan Darah</span><span class="value">{{ $hasil_ai['tekanan_darah'] }}</span></td>
             <td><span class="label">Riwayat Diabetes Keluarga</span><span class="value">{{ $hasil_ai['riwayat_diabetes'] }}</span></td>
         </tr>

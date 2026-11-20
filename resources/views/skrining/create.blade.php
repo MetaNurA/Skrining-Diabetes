@@ -43,11 +43,11 @@
                         <h1 class="text-xl font-bold text-gray-900">Portal Skrining Mandiri Diabetes Mellitus Remaja</h1>
                         <span class="bg-brand-50 text-brand-600 text-xs font-semibold px-2 py-1 rounded-md">AKTIF</span>
                     </div>
-                    <p class="text-sm text-gray-500 mt-1">Berbasis Algoritma Logistic Regression & Explainable AI (SHAP) sesuai parameter Kemenkes RI.</p>
+                    <p class="text-sm text-gray-500 mt-1">Formulir skrining; koneksi Logistic Regression dan SHAP belum tersedia.</p>
                 </div>
             </div>
             <div class="flex items-center gap-4 mt-4 md:mt-0 text-sm font-medium">
-                <span class="flex items-center gap-1 text-gray-600"><svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Akurasi 92.4%</span>
+                <span class="flex items-center gap-1 text-gray-600">Model belum terhubung</span>
                 <span class="flex items-center gap-1 text-gray-600"><svg class="w-4 h-4 text-brand-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg> 100% Anonim</span>
             </div>
         </div>
@@ -140,11 +140,11 @@
                             <div class="flex items-center gap-3 mb-3">
                                 <span class="w-6 h-6 rounded-full bg-brand-500 text-white text-sm font-bold flex items-center justify-center">1</span>
                                 <label class="font-semibold text-gray-800">Usia Pengguna (Tahun)</label>
-                                <span class="ml-auto text-xs text-gray-400">Rentang evaluasi: 15 - 85 thn</span>
+                                <span class="ml-auto text-xs text-gray-400">Rentang remaja: 10 - 19 tahun</span>
                             </div>
                             <div class="flex items-center border border-gray-200 rounded-xl overflow-hidden max-w-xs">
                                 <button type="button" class="px-4 py-3 bg-gray-50 hover:bg-gray-100 text-brand-500 font-bold text-lg">-</button>
-                                <input type="number" name="usia" value="30" class="w-full text-center py-3 font-semibold text-lg focus:outline-none" min="15" max="85">
+                                <input type="number" name="usia" value="14" class="w-full text-center py-3 font-semibold text-lg focus:outline-none" min="10" max="19">
                                 <button type="button" class="px-4 py-3 bg-gray-50 hover:bg-gray-100 text-brand-500 font-bold text-lg">+</button>
                             </div>
                         </div>
@@ -204,10 +204,10 @@
                                     </div>
                                     <div>
                                         <p class="text-xs text-gray-600">Kalkulasi Indeks Massa Tubuh (BMI)</p>
-                                        <p class="font-bold text-gray-900 text-lg">23.0 <span class="text-sm font-normal text-gray-500">kg/m²</span></p>
+                                        <p class="font-bold text-gray-900 text-lg"><span id="bmi-value">23.0</span> <span class="text-sm font-normal text-gray-500">kg/m²</span></p>
                                     </div>
                                 </div>
-                                <span class="bg-brand-100 text-brand-700 text-xs font-semibold px-3 py-1 rounded-full">Overweight (23.0 - 24.9)</span>
+                                <span id="bmi-category" class="bg-brand-100 text-brand-700 text-xs font-semibold px-3 py-1 rounded-full">Overweight</span>
                             </div>
                         </div>
 
@@ -373,3 +373,41 @@
 </form>
 
 @endsection
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const heightInput = document.querySelector('input[name="tinggi"]');
+        const weightInput = document.querySelector('input[name="berat"]');
+        const bmiValue = document.getElementById('bmi-value');
+        const bmiCategory = document.getElementById('bmi-category');
+
+        function updateBmi() {
+            const heightCm = Number(heightInput.value);
+            const weightKg = Number(weightInput.value);
+
+            if (!heightCm || !weightKg || heightCm <= 0 || weightKg <= 0) {
+                bmiValue.textContent = '—';
+                bmiCategory.textContent = 'Masukkan tinggi dan berat badan';
+                return;
+            }
+
+            const bmi = weightKg / Math.pow(heightCm / 100, 2);
+            bmiValue.textContent = bmi.toFixed(1);
+
+            if (bmi < 18.5) {
+                bmiCategory.textContent = 'Berat badan kurang';
+            } else if (bmi < 23) {
+                bmiCategory.textContent = 'Normal';
+            } else if (bmi < 25) {
+                bmiCategory.textContent = 'Overweight';
+            } else {
+                bmiCategory.textContent = 'Obesitas';
+            }
+        }
+
+        heightInput.addEventListener('input', updateBmi);
+        weightInput.addEventListener('input', updateBmi);
+        updateBmi();
+    });
+</script>
+@endpush

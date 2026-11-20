@@ -24,7 +24,7 @@
                 <div class="min-w-0 flex-1">
                     <span class="inline-flex rounded-full bg-green-100 px-3 py-1 text-xs font-bold text-green-800">{{ $hasil_ai['kategori'] }}</span>
                     <h2 class="mt-4 text-xl sm:text-2xl font-bold text-gray-900">Hasil skrining menunjukkan risiko rendah</h2>
-                    <p class="mt-2 text-gray-600">Berdasarkan data yang dimasukkan, model memperkirakan tingkat risiko saat ini rendah. Hasil ini merupakan skrining awal, bukan diagnosis medis.</p>
+                    <p class="mt-2 text-gray-600">{{ $hasil_ai['status_model'] }} Hasil ini merupakan skrining awal, bukan diagnosis medis.</p>
                     <p class="mt-4 text-sm text-gray-500">ID evaluasi: <strong class="text-gray-800">{{ $hasil_ai['id_evaluasi'] }}</strong> · {{ $hasil_ai['waktu'] }}</p>
                 </div>
                 <div class="shrink-0 rounded-2xl bg-green-50 px-8 py-6 text-center">
@@ -37,7 +37,7 @@
 
         <section class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="rounded-xl border border-gray-200 bg-white p-4"><p class="text-xs text-gray-500">Usia</p><p class="mt-1 font-semibold text-gray-900">{{ $hasil_ai['usia'] }} tahun</p></div>
-            <div class="rounded-xl border border-gray-200 bg-white p-4"><p class="text-xs text-gray-500">Indeks Massa Tubuh</p><p class="mt-1 font-semibold text-gray-900">{{ $hasil_ai['bmi'] }} kg/m²</p></div>
+            <div class="rounded-xl border border-gray-200 bg-white p-4"><p class="text-xs text-gray-500">Indeks Massa Tubuh</p><p class="mt-1 font-semibold text-gray-900">{{ $hasil_ai['bmi'] }} kg/m² · {{ $hasil_ai['kategori_bmi'] }}</p><p class="text-xs text-gray-500">TB {{ $hasil_ai['tinggi'] }} cm · BB {{ $hasil_ai['berat'] }} kg</p></div>
             <div class="rounded-xl border border-gray-200 bg-white p-4"><p class="text-xs text-gray-500">Tekanan darah</p><p class="mt-1 font-semibold text-gray-900">{{ $hasil_ai['tekanan_darah'] }}</p></div>
             <div class="rounded-xl border border-gray-200 bg-white p-4"><p class="text-xs text-gray-500">Aktivitas fisik</p><p class="mt-1 font-semibold text-gray-900">{{ ucfirst($hasil_ai['aktivitas']) }}</p></div>
         </section>
